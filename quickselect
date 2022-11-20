@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+int partition(int A[],int low, int high){
+	int pivot=A[low];
+	int i=low;
+	int j=high;
+	while(i<j){
+		do{
+			i++;
+		}while(A[i]<=pivot);
+	    do{
+	    	j--;
+		}while(A[j]>pivot);
+		if(i<j){
+			std::swap(A[i],A[j]);
+		}
+	}
+	std::swap(A[low],A[j]);
+	return j;
+}
+int quicksort(int arr[],int low, int high,int k){
+	if(low<high){
+		int j=partition(arr,low,high);
+		if(j==k){
+			return arr[j];
+		}
+		else if(j>k) {
+		    return quicksort(arr,low,j,k);
+	    }
+	    else if(j<k) {
+		    return quicksort(arr,j+1,high,k);
+	    }   
+	}
+	return INT_MAX;
+}
+
+int main(){
+	int k=INT_MAX;
+int arr[8]={8,7,6,4,18,98,8,k};
+int ele=quicksort(arr,0,7,7);
+cout<<ele;
+}
